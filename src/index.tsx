@@ -1,9 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './routes/root';
+import Catalog from './catalog/Catalog';
+import ErrorPage from "./error-page";
+
 import { StyledEngineProvider } from '@mui/material/styles';
 import reportWebVitals from './reportWebVitals';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "catalog",
+    element: <Catalog/>,
+    errorElement: <ErrorPage />,
+  }
+]);
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +33,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <App />
+      <RouterProvider router={router} />
     </StyledEngineProvider>
   </React.StrictMode>
 );
